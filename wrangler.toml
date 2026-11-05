@@ -1,0 +1,8 @@
+name = "deobfus"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+# Kalau mau pakai binding (misal KV buat nyimpen rule nanti), tinggal tambah di sini.
+# [[kv_namespaces]]
+# binding = "DEOBF_RULES"
+# id = "xxxxx"
