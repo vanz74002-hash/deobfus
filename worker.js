@@ -1,6 +1,6 @@
-import indexHtml from './index.html';
-import styleCss from './style.css';
-import appJs from './app.js';
+import indexHtml from './index.html?text';
+import styleCss from './style.css?text';
+import appJs from './app.js?text';
 
 import { processPrometheus } from './prometheus.js';
 import { processLuraph } from './luraph.js';
@@ -52,6 +52,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // Serve Static Assets sebagai Text String
     if (url.pathname === '/' || url.pathname === '/index.html') {
       return new Response(indexHtml, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
     }
@@ -62,7 +63,7 @@ export default {
       return new Response(appJs, { headers: { 'Content-Type': 'application/javascript;charset=UTF-8' } });
     }
 
-    // List semua engine (buat UI)
+    // API: List Engines
     if (url.pathname === '/api/engines' && request.method === 'GET') {
       return new Response(JSON.stringify({
         total: ENGINES.length,
@@ -70,14 +71,14 @@ export default {
       }), { headers: { 'Content-Type': 'application/json' } });
     }
 
-    // Health check
+    // API: Health Check
     if (url.pathname === '/api/health') {
       return new Response(JSON.stringify({ status: 'online', engines: ENGINES.length }), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // Main deobfuscation endpoint
+    // API: Main Deobfuscation Endpoint
     if (url.pathname === '/api/deobfuscate' && request.method === 'POST') {
       try {
         const { code } = await request.json();
@@ -89,11 +90,11 @@ export default {
           }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
 
-        // Cascade detection
         let bestResult = null;
         let bestConfidence = 0;
         let detectedEngine = null;
 
+        // Cascade detection
         for (const engine of ENGINES) {
           const r = engine.processor(code);
           if (r.success && r.detection && r.detection[engine.flag] && r.detection.confidence > bestConfidence) {
