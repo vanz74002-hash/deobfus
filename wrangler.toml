@@ -1,10 +1,10 @@
-name = "kairo-luau-deobf"
+name = "deobfus"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 
-# Konfigurasi ini memaksa Wrangler untuk memperlakukan file berikut 
-# sebagai string teks mentah, BUKAN modul yang dieksekusi.
+# Ini WAJIB ada. Memberitahu Wrangler untuk memperlakukan file ini 
+# sebagai string teks mentah, BUKAN kode JavaScript/CSS yang dieksekusi.
 [[rules]]
 type = "Text"
-globs = ["**/*.html", "**/*.css", "app.js"]
+globs = ["**/*.html", "**/*.css", "**/app.js"]
 fallthrough = true
