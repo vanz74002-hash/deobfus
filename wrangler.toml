@@ -1,9 +1,9 @@
-name = "deobfus"
+name = "kairo-luau-deobf"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 
-# PENTING: Beritahu Wrangler untuk memperlakukan file ini sebagai teks biasa (string), 
-# bukan modul JavaScript/CSS yang dieksekusi. Ini mencegah error "document is not defined".
+# Konfigurasi ini memaksa Wrangler untuk memperlakukan file berikut 
+# sebagai string teks mentah, BUKAN modul yang dieksekusi.
 [[rules]]
 type = "Text"
 globs = ["**/*.html", "**/*.css", "app.js"]
