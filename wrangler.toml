@@ -2,7 +2,9 @@ name = "deobfus"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 
-# Kalau mau pakai binding (misal KV buat nyimpen rule nanti), tinggal tambah di sini.
-# [[kv_namespaces]]
-# binding = "DEOBF_RULES"
-# id = "xxxxx"
+# PENTING: Beritahu Wrangler untuk memperlakukan file ini sebagai teks biasa (string), 
+# bukan modul JavaScript/CSS yang dieksekusi. Ini mencegah error "document is not defined".
+[[rules]]
+type = "Text"
+globs = ["**/*.html", "**/*.css", "app.js"]
+fallthrough = true
