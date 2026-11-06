@@ -1,6 +1,6 @@
-import indexHtml from './index.html?text';
-import styleCss from './style.css?text';
-import appJs from './app.js?text';
+import indexHtml from './index.html';
+import styleCss from './style.css';
+import appJs from './app.js';
 
 import { processPrometheus } from './prometheus.js';
 import { processLuraph } from './luraph.js';
@@ -52,7 +52,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // Serve Static Assets sebagai Text String
+    // Serve Static Assets (akan dibaca sebagai string text berkat [[rules]])
     if (url.pathname === '/' || url.pathname === '/index.html') {
       return new Response(indexHtml, { headers: { 'Content-Type': 'text/html;charset=UTF-8' } });
     }
