@@ -1,53 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAIRO // Luau Deobfuscator</title>
-    <link rel="stylesheet" href="/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deobfuscator Pro — KAIRO ENGINE</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <div class="bg-grid"></div>
-    
-    <main class="container">
-        <header class="header">
-            <h1 class="glitch" data-text="KAIRO_ENGINE">KAIRO_ENGINE</h1>
-            <p class="subtitle">UNIVERSAL LUAU DEOBFUSCATION PROTOCOL</p>
-            <div class="status-bar">
-                <span class="status-dot online"></span> SYSTEM ONLINE // v4.1
-            </div>
-        </header>
+  <div class="bg-grid"></div>
+  <div class="bg-scanlines"></div>
 
-        <section class="workspace">
-            <div class="panel input-panel">
-                <div class="panel-header">
-                    <span class="indicator"></span> INPUT_PAYLOAD
-                </div>
-                <textarea id="codeInput" placeholder="-- Paste obfuscated Luau code here..."></textarea>
-                <div class="file-upload">
-                    <label for="fileInput" class="file-label">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                        CHOOSE FILE (.txt, .lua)
-                    </label>
-                    <input type="file" id="fileInput" accept=".txt,.lua" hidden>
-                    <span id="fileName" class="file-name">No file selected</span>
-                </div>
-            </div>
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-title">Deobfuscator <span class="accent">Pro</span></div>
+          <div class="logo-sub">Scan · Deobfuscate · Export</div>
+        </div>
+      </div>
 
-            <div class="controls">
-                <button id="deobfBtn" class="btn-deobf">
-                    <span class="btn-text">INITIATE DEOBFUSCATION</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
-        </section>
+      <nav class="nav">
+        <a class="nav-item active" data-page="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Home</span>
+        </a>
+        <a class="nav-item" data-page="logs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Logs</span>
+        </a>
+        <a class="nav-item" data-page="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Settings</span>
+        </a>
+        <a class="nav-item" data-page="about">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span>About</span>
+        </a>
+      </nav>
 
-        <footer class="footer">
-            <p>// BUILT BY KAIRO // CYBERCRIME GAME SPECIALIST //</p>
-        </footer>
+      <div class="powered-by">
+        <div class="bolt">⚡</div>
+        <div class="powered-text">
+          <div>Powered by</div>
+          <div class="engine-ver">Advanced Engine v2.0.0</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- WORKSPACE: Orb + Task Progress -->
+      <div class="workspace">
+        <!-- Holographic Orb (default visible) -->
+        <div class="orb-stage" id="orbStage">
+          <div class="orb" id="orb">
+            <div class="orb-core"></div>
+            <div class="orb-ring ring-1"></div>
+            <div class="orb-ring ring-2"></div>
+            <div class="orb-ring ring-3"></div>
+            <div class="orb-ring ring-4"></div>
+            <div class="orb-code">&lt;/&gt;</div>
+            <div class="orb-glow"></div>
+          </div>
+          <div class="orb-platform">
+            <div class="platform-ring"></div>
+            <div class="platform-ring platform-ring-2"></div>
+          </div>
+          <div class="orb-particles" id="orbParticles"></div>
+        </div>
+
+        <!-- Task Progress Panel (hidden until done) -->
+        <div class="task-panel" id="taskPanel" style="display:none">
+          <div class="task-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <h3>Task Progress</h3>
+          </div>
+          <div class="task-list">
+            <div class="task" id="task1">
+              <div class="task-num">1</div>
+              <div class="task-name">Scan jenis obfuscate</div>
+              <div class="task-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+            <div class="task-connector"></div>
+            <div class="task" id="task2">
+              <div class="task-num">2</div>
+              <div class="task-name">Deobfuscation</div>
+              <div class="task-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+            <div class="task-connector"></div>
+            <div class="task" id="task3">
+              <div class="task-num">3</div>
+              <div class="task-name">Create file .txt</div>
+              <div class="task-check">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT PANEL -->
+      <div class="input-panel" id="inputPanel">
+        <div class="panel-header">
+          <span class="indicator"></span>
+          <span>INPUT_PAYLOAD</span>
+          <span class="engine-count" id="engineCount">21 ENGINES LOADED</span>
+        </div>
+        <textarea id="codeInput" placeholder="-- Paste obfuscated Luau code here..."></textarea>
+        <div class="file-row">
+          <label for="fileInput" class="file-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            CHOOSE FILE (.txt, .lua)
+          </label>
+          <input type="file" id="fileInput" accept=".txt,.lua" hidden />
+          <span id="fileName" class="file-name">No file selected</span>
+        </div>
+        <button id="deobfBtn" class="btn-deobf">
+          <span class="btn-text">INITIATE DEOBFUSCATION</span>
+          <span class="btn-loader"></span>
+        </button>
+      </div>
+
+      <!-- LOG PANEL -->
+      <div class="log-panel" id="logPanel">
+        <div class="log-header">
+          <div class="log-tabs">
+            <span class="tab active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              Process Log
+            </span>
+            <span class="tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              Output
+            </span>
+            <span class="tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              Statistics
+            </span>
+          </div>
+          <div class="log-status" id="logStatus">
+            <span class="status-dot idle"></span>
+            <span class="status-text">Idle</span>
+          </div>
+        </div>
+        <div class="log-content" id="logContent">
+          <div class="log-welcome">
+            <div class="log-welcome-icon">⚡</div>
+            <div class="log-welcome-text">
+              <div class="log-welcome-title">KAIRO ENGINE v4.1 — Ready</div>
+              <div class="log-welcome-sub">21 obfuscator engines loaded. Paste code and click INITIATE.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-shine"></div>
+        </div>
+        <div class="progress-text" id="progressText">0%</div>
+      </div>
     </main>
+  </div>
 
-    <script src="/app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
